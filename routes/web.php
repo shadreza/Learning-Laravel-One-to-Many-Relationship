@@ -40,3 +40,20 @@ Route::get('create-post/{user_id}/{post_name}', function ($user_id, $post_name) 
     $user = User::findOrFail($user_id);
     $user->posts()->save(new Post(['title' => $post_name, 'body' => $post_name . " many more to come"]));
 });
+
+
+// reading data [read]
+Route::get('read-post/{post_id}', function ($post_id) {
+    $post = Post::findOrFail($post_id);
+    return $post->title;
+});
+
+
+// reading posts from user [read]
+Route::get('read/{user_id}', function ($user_id) {
+    $user = User::findOrFail($user_id);
+    foreach ($user->posts as $post) {
+        echo $post->title . "<br>";
+    }
+    return dd($user->posts);
+});
