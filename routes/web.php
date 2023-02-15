@@ -57,3 +57,11 @@ Route::get('read/{user_id}', function ($user_id) {
     }
     return dd($user->posts);
 });
+
+
+// updating posts from user [read]
+Route::get('update/{user_id}', function ($user_id) {
+    $user = User::findOrFail($user_id);
+
+    $user->posts()->where('id', '=', 3)->update(['title' => '2 2 2 This is updated title', 'body' => '2 2 2 This is the updated body']);
+});
