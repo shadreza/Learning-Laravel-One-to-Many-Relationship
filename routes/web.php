@@ -65,3 +65,10 @@ Route::get('update/{user_id}', function ($user_id) {
 
     $user->posts()->where('id', '=', 3)->update(['title' => '2 2 2 This is updated title', 'body' => '2 2 2 This is the updated body']);
 });
+
+
+// deleting posts from user [delete]
+Route::get('delete/{user_id}', function ($user_id) {
+    $user = User::findOrFail($user_id);
+    return $user->posts()->delete();
+});
